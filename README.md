@@ -5,10 +5,6 @@ A small, simple javascript library that allows you to manage timeouts on webpage
   
 No external dependencies.  
 
-###TODO:
-+ remove hardcoded javascript alert(), allow for custom alert function
-+ event listeners should be added/removed on a timer, not immediately when activity occurs
-
 ###API:
 Create a new instance of SessionTimer  
 ``` var session = new SessionTimer();``` 
@@ -22,3 +18,6 @@ session.init({
     refresh: $.getJSON('/api/session')
 });
 ```  
+###TODO:
++ remove hardcoded javascript alert(), allow for custom alert function
++ event listeners should be added/removed on a timer, not immediately when activity occurs
