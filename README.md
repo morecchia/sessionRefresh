@@ -5,8 +5,7 @@ A small, simple javascript library that allows you to add a timeout to a webpage
   
 No external dependencies.
 
-API:  
-
+###API:
 Create a new instance of SessionTimer  
 ``` var session = new SessionTimer();``` 
 
