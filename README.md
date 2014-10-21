@@ -1,7 +1,7 @@
 sessionRefresh
 ==============
 
-A small, simple javascript library that allows you to add a timeout to a webpage when there is no mouse or keyboard activity.  
+A small, simple javascript library that allows you to manage timeouts on webpage when there is no (mouse or keyboard) activity.  "Refresh" the session by passing in a promise object or a custom callback function.
   
 No external dependencies.
 
