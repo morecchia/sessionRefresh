@@ -6,11 +6,10 @@ var SessionTimer = function (element) {
 	
 		init: function (config) {
 			config = config || {};
-			
+			console.log("here we go...");
 			this.duration = config.duration || 900000;
 			this.redirectUrl = config.url || '#';
 			this.message = config.message || '';
-			this.confirm = config.confirm;
 			this.refresh = config.refresh;
 			
 			if (this.timer) {
@@ -18,27 +17,23 @@ var SessionTimer = function (element) {
 			}
 		
 			this.addListeners();
-			this.setTimer();
+			this.sessionTimer();
 		},
 		
 		sessionHandler: function(event) {
 			if (typeof runner.refresh === 'function') {
 				sessionAlive = runner.refresh();
 			} else if (typeof runner.refresh.then === 'function') { // quick, dirty check for a promise object
-				runner.refresh
-					.then(function (data) {
+				runner.refresh.then(function (data) {
 						sessionAlive = true; // set on AJAX success
+				}, function (jqXHR, textStatus, error) {
+					    sessionAlive = false;
+					    throw new Error(error);
 					});
-					/* TODO: add error handling for promises
-					.fail(function (error) {
-						sessionAlive = false;
-						console.log(error);
-						// throw new Error(error);
-					});
-					*/
 			} else {
 				throw new Error('Callback not a function. You must provide a valid function the session timer.');
 			}
+
 			el.removeEventListener(event.type, this.sessionHandler, false);
 			window.clearTimeout(this.timer);
 		},
@@ -49,40 +44,21 @@ var SessionTimer = function (element) {
 				el.addEventListener('keypress', this.sessionHandler, false);
 			}
 		},
-		
-		waitExpire: function (confirmation, callback) {
-			if (typeof callback === 'function') {
-				window.setTimeout(function() {
-					callback(confirmation);
-				}, 5000);
-			} else {
-				throw new Error('Callback not a function. You must provide a valid function the session timer.');
-			}
-		},
 	
-		setTimer: function () {
+		sessionTimer: function () {
 			var self = this;
-			this.waitConfirm();
-			this.timer = window.setTimeout(function () {	
+
+			this.timer = window.setTimeout(function () {
 				if (!sessionAlive) {
-					var confirmation = self.confirm || window.confirm(self.message);
-										
-					if (!confirmation) {
-						window.clearTimeout(self.timer);
-						window.location = self.redirectUrl; // '/logout'
-					}
-					
-					self.waitExpire(function (confirmation) {
-						if (confirmation) {
-							window.location = self.redirectUrl;
-						}
-					});
+					alert(self.message);
+					window.clearTimeout(self.timer);
+					window.location = self.redirectUrl; // '/logout'
 				}
-				
+
 				sessionAlive = false;
 
 				self.addListeners();
-				self.setTimer();
+				self.sessionTimer();
 				
 			}, self.duration);
 		}
