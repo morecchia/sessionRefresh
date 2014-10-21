@@ -10,7 +10,7 @@ API:
 Create a new instance of SessionTimer  
 `var session = new SessionTimer();`
 
-Call the init() method, passing in a configuration object to kick everything off
+Call the init() method, passing in a configuration object to kick everything off  
 `session.init({
   duration: 3540000, // the timeout duration; defaults to 15 minutes
   message: 'Your session has expired.  You will now be logged out.', // the alert message; defaults to an empty string
