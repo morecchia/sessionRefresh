@@ -21,11 +21,15 @@ var SessionRefresh = function (element) {
         },
 
         sessionNotify: function () {
-            this.notify(this.message);
+            if (typeof this.notify === 'function') {
+                this.notify(this.message);
+            }
         },
 
         sessionLogout: function (url, callback) {
-            callback(url);
+            if (typeof callback === 'function') {
+                callback(url);
+            }
         },
 
         sessionHandler: function (event) {
