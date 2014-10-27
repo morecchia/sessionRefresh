@@ -12,7 +12,7 @@ Create a new instance of SessionTimer
 Call the init() method, passing in a configuration object to kick everything off  
 ``` 
 // this is being called within a Backbone view  
-var self = this  
+var self = this;  
 session.init({
   duration: 3540000, // 59 minutes; the amount of time the session can be inactive
   message: 'Your session will expire soon.', // the message presented to the user
