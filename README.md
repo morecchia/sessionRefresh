@@ -44,5 +44,5 @@ session.init({
 });
 ```  
 ###TODO:
-+ remove hardcoded javascript alert(), allow for custom alert function
++ more error checking
 + event listeners should be added/removed on a timer, not immediately when activity occurs
