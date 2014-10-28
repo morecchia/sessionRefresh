@@ -33,7 +33,6 @@ var SessionRefresh = function (element) {
         },
 
         sessionHandler: function (event) {
-            var waitTimer = window.setTimeout()
             if (typeof runner.refresh === 'function') {
                 sessionAlive = runner.refresh();
             } else if (typeof runner.refresh.then === 'function') { // quick, dirty check for a promise object
