@@ -11,18 +11,33 @@ Create a new instance of SessionTimer
 
 Call the init() method, passing in a configuration object to kick everything off  
 ``` 
-// this is being called within a Backbone view  
-var self = this;  
-session.init({
-  duration: 3540000, // 59 minutes; the amount of time the session can be inactive
-  message: 'Your session will expire soon.', // the message presented to the user
-  url: '/Account/SessionTimeout', // the url to redirect the user to when the session expires
-  refresh: function () { return true; },// must be a callback that returns boolean,  
-                                        // or it can be a promise object, like $.post('/session/refresh', {})
-  logout: function (url) {  
-  // a callback function that defines the logout behavior.  
-  // this example gives you 60 seconds to click continue or log out  
-  // before you are automatically redirected to the url
+session.init(config);
+```
+Set up a configuration object something like this:
+```
+var config = {};
+```
+duration = the amount of time in ms that the session can be inactive
+```
+config.duration = 3540000;
+```
+message = the message presented to the user when their session expires
+```
+config.message = 'Your session will expire soon.';
+```
+url = the url to redirect the user to when the session expires
+```
+config.url = '/Account/SessionTimeout';
+```
+refresh = can be a callback that returns boolean or i a promise object, like $.post('/session/refresh', {})
+```
+config.refresh = function () { return true; };
+```
+logout = a callback function that defines the logout behavior
+```
+// this example gives you 60 seconds to click continue or log out  
+// before you are automatically redirected to the url
+config.logout = function (url) {  
     var timer = window.setTimeout(function () {
       window.location = url;
     }, 60000);
@@ -32,16 +47,16 @@ session.init({
     $("button#continue").click(function () {
       window.clearTimeout(timer);
     });
-  },
-  notify: function (message) {  
-  // called when the session duration expires  
-  // in this example, a modal window pops up with the session message
-  // you can simply pass alert(message) if you are testing
-    self.message = message;
-    $(document.body).append(self.render().el);
+};
+```
+notify = a callback function, called when the session duration expires
+```
+// in this example, a modal window pops up with the session message
+// you can simply pass 'alert(message);' if you are testing
+notify: function (message) {  
     $("#myModal").modal({ backdrop: 'static' });
   }
-});
+};
 ```  
 ###TODO:
 + more error checking
