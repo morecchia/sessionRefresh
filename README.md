@@ -6,8 +6,8 @@ A small, simple javascript library that allows you to manage timeouts on a webpa
 No external dependencies.  
 
 ###API:
-Create a new instance of SessionTimer  
-``` var session = new SessionTimer();``` 
+Create a new instance of SessionRefresh  
+``` var session = new SessionRefresh();``` 
 
 Call the init() method, passing in a configuration object to kick everything off  
 ``` 
