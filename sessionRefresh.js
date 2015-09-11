@@ -2,7 +2,7 @@ var SessionRefresh = function (element) {
     var sessionAlive = false,
         el = element || document.body;
 
-    return {
+    var runner = {
 
         init: function (config) {
             this.config = config || {};
@@ -76,4 +76,6 @@ var SessionRefresh = function (element) {
             }, self.duration);
         }
     };
+    
+    return runner;
 };
